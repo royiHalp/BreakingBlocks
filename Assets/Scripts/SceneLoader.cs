@@ -20,4 +20,10 @@ public class SceneLoader : MonoBehaviour {
     {
         Application.Quit();
     }
+
+    public void ReloadCurrentScene()
+    {
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentSceneIndex);
+    }
 }

@@ -14,12 +14,8 @@ public class Paddle : MonoBehaviour
     private Ball theBall;
     void Start()
     {
-        theGameStatus = FindObjectOfType<GameStatus>();
+        theGameStatus = GameStatus.gameStatusInstance;
         theBall = FindObjectOfType<Ball>();
-        if (theGameStatus.IsAutoPlayEnabled())
-        {
-            theGameStatus.SetGameSpeed(10f);
-        }
     }
 
     // Update is called once per frame

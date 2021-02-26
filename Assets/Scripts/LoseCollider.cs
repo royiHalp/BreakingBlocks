@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 using UnityEngine.SceneManagement;
 
 public class LoseCollider : MonoBehaviour
@@ -11,9 +12,14 @@ public class LoseCollider : MonoBehaviour
     private Ball theBall;
     private void Start()
     {
-        theGameStatus = theGameStatus = FindObjectOfType<GameStatus>();
-        isAutoPlayMode = theGameStatus.IsAutoPlayEnabled();
+        // theGameStatus = FindObjectOfType<GameStatus>();
+        theGameStatus = GameStatus.gameStatusInstance;
         theBall = FindObjectOfType<Ball>();
+    }
+
+    private void Update()
+    {
+        isAutoPlayMode = theGameStatus.IsAutoPlayEnabled();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
