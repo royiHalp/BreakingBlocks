@@ -1,14 +1,69 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SceneLoader : MonoBehaviour {
+    private GameStatus theGameStatus;
+    private const int delayInterval = 5;
+    private Text CountDown;
+    
+    private int currentTimer = delayInterval;
 
-	public void LoadNextScene()
+    private void Awake()
     {
-        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(currentSceneIndex + 1);
+        if (!theGameStatus)
+        {
+            theGameStatus = GameStatus.gameStatusInstance;
+        }
+        if (theGameStatus && theGameStatus.IsAutoPlayEnabled())
+        {
+            EnableAutoPlayAndStart();
+        }
+        CountDown = GameObject.FindObjectOfType<Text>();
+        CountDown.enabled = false;
+    }
+
+    public void EnableAutoPlayAndStart()
+    {
+        if (!theGameStatus)
+        {
+            theGameStatus = GameStatus.gameStatusInstance;
+        }
+        if (theGameStatus)
+        {
+            theGameStatus.EnableAutoPlay();
+        }
+        LoadNextScene();
+    }
+
+    public void LoadNextScene()
+    {
+        Scene ActiveScene = SceneManager.GetActiveScene();
+        int currentSceneIndex = ActiveScene.buildIndex;
+        if (ActiveScene.name == "main game")
+        {
+            StartCoroutine(StartTimerForSuccess());
+        }
+        else
+        {
+            SceneManager.LoadScene(currentSceneIndex + 1);
+        }
+    }
+    
+    private IEnumerator StartTimerForSuccess()
+    {
+        while (currentTimer > 0)
+        {
+            yield return new WaitForSeconds(1.0f);
+            currentTimer -= 1;
+            CountDown.text = currentTimer.ToString();
+        }
+
+        currentTimer = delayInterval;
+        SceneManager.LoadScene("Success");
     }
 
     public void LoadStartScene()

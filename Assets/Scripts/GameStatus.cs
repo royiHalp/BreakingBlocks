@@ -6,19 +6,19 @@ using UnityEngine.SceneManagement;
 
 public class GameStatus : MonoBehaviour
 {
-    [Range(0,1f)] [SerializeField] float gameSpeed = 1f;
+    [Range(0,1f)] [SerializeField] static float gameSpeed = 1f;
 
-    [SerializeField] private bool isAutoPlayEnabled;
+    [SerializeField] private static bool isAutoPlayEnabled;
 
     public static GameStatus gameStatusInstance;
     // Start is called before the first frame update
     void Start()
     {
+        gameStatusInstance = this;
     }
 
     private void Awake()
     {
-        gameStatusInstance = this;
         GameObject WritingBlocks = GameObject.FindGameObjectWithTag("WritingBlocks");
         if (WritingBlocks)
         {
@@ -43,8 +43,8 @@ public class GameStatus : MonoBehaviour
     public void EnableAutoPlay()
     {
         GameStatus gs = FindObjectOfType<GameStatus>();
-        gs.gameSpeed = 10f;
-        gs.isAutoPlayEnabled = true;
+        gameSpeed = 10f;
+        isAutoPlayEnabled = true;
 
     }
 
