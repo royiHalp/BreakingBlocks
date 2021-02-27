@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class SceneLoader : MonoBehaviour {
     private GameStatus theGameStatus;
-    private const int delayInterval = 5;
+    private const int delayInterval = 100;
     private Text CountDown;
     
     private int currentTimer = delayInterval;
@@ -23,7 +23,10 @@ public class SceneLoader : MonoBehaviour {
             EnableAutoPlayAndStart();
         }
         CountDown = GameObject.FindObjectOfType<Text>();
-        CountDown.enabled = false;
+        if (CountDown)
+        {
+            CountDown.enabled = false;
+        }
     }
 
     public void EnableAutoPlayAndStart()
@@ -45,6 +48,7 @@ public class SceneLoader : MonoBehaviour {
         int currentSceneIndex = ActiveScene.buildIndex;
         if (ActiveScene.name == "main game")
         {
+            CountDown.enabled = true;
             StartCoroutine(StartTimerForSuccess());
         }
         else

@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class GameStatus : MonoBehaviour
 {
-    [Range(0,1f)] [SerializeField] static float gameSpeed = 1f;
+    [Range(0,1f)] static float gameSpeed = 0.7f;
 
-    [SerializeField] private static bool isAutoPlayEnabled;
+    private static bool isAutoPlayEnabled;
 
     public static GameStatus gameStatusInstance;
     // Start is called before the first frame update
