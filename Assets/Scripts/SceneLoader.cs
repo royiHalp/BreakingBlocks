@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class SceneLoader : MonoBehaviour {
     private GameStatus theGameStatus;
-    private const int delayInterval = 100;
+    private const int delayInterval = 30;
     private Text CountDown;
     
     private int currentTimer = delayInterval;

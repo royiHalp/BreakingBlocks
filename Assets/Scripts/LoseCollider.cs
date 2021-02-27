@@ -11,7 +11,7 @@ public class LoseCollider : MonoBehaviour
     private GameStatus theGameStatus;
     private bool isAutoPlayMode;
     private Ball theBall;
-    private const int delayInterval = 5;
+    private const int delayInterval = 2;
     
     private int currentTimer = delayInterval;
     private Text CountDown;
