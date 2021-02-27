@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class LoseCollider : MonoBehaviour
 {
@@ -13,11 +14,14 @@ public class LoseCollider : MonoBehaviour
     private const int delayInterval = 5;
     
     private int currentTimer = delayInterval;
+    private Text CountDown;
     private void Start()
     {
         // theGameStatus = FindObjectOfType<GameStatus>();
         theGameStatus = GameStatus.gameStatusInstance;
         theBall = FindObjectOfType<Ball>();
+        CountDown = GameObject.FindObjectOfType<Text>();
+        CountDown.enabled = false;
     }
 
     private void Update()
@@ -34,17 +38,17 @@ public class LoseCollider : MonoBehaviour
             return;
         }
         Debug.Log("Loose!");
-        SceneManager.LoadScene("Game Over");
+        CountDown.enabled = true;
         StartCoroutine(StartTimerForGameOver());
     }
     
     private IEnumerator StartTimerForGameOver()
     {
-        Debug.Log("in StartTimerForGameOver");
         while (currentTimer > 0)
         {
             yield return new WaitForSeconds(1.0f);
             currentTimer -= 1;
+            CountDown.text = currentTimer.ToString();
         }
 
         currentTimer = delayInterval;
