@@ -7,7 +7,7 @@ public class Ball : MonoBehaviour
     [SerializeField] private float launchVelocityY = 15f;
     [SerializeField] private AudioClip[] ballSounds;
 
-    [SerializeField] private float randomVelocityFactor = 0.2f;
+    [SerializeField] private float randomVelocityFactor = 0.5f;
     // state
     private Vector2 paddleToBallVector;
     private bool gameStarted = false;

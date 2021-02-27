@@ -19,6 +19,19 @@ public class GameStatus : MonoBehaviour
     private void Awake()
     {
         gameStatusInstance = this;
+        GameObject WritingBlocks = GameObject.FindGameObjectWithTag("WritingBlocks");
+        if (WritingBlocks)
+        {
+            float WritingBlocksX = WritingBlocks.transform.position.x;
+            float WritingBlocksY = WritingBlocks.transform.position.y;
+            WritingBlocks.transform.position =
+                new Vector3(WritingBlocksX, WritingBlocksY, 0);            
+        }
+        else
+        {
+            Debug.Log("cant find writing blocks");
+        }
+
     }
 
     // Update is called once per frame

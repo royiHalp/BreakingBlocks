@@ -10,6 +10,9 @@ public class LoseCollider : MonoBehaviour
     private GameStatus theGameStatus;
     private bool isAutoPlayMode;
     private Ball theBall;
+    private const int delayInterval = 5;
+    
+    private int currentTimer = delayInterval;
     private void Start()
     {
         // theGameStatus = FindObjectOfType<GameStatus>();
@@ -31,6 +34,20 @@ public class LoseCollider : MonoBehaviour
             return;
         }
         Debug.Log("Loose!");
+        SceneManager.LoadScene("Game Over");
+        StartCoroutine(StartTimerForGameOver());
+    }
+    
+    private IEnumerator StartTimerForGameOver()
+    {
+        Debug.Log("in StartTimerForGameOver");
+        while (currentTimer > 0)
+        {
+            yield return new WaitForSeconds(1.0f);
+            currentTimer -= 1;
+        }
+
+        currentTimer = delayInterval;
         SceneManager.LoadScene("Game Over");
     }
 }

@@ -24,7 +24,7 @@ public class Block : MonoBehaviour
     {
         Destroy(gameObject);
         level.BlockDestroyed();
-        TriggerSparklesVFX();
+        //TriggerSparklesVFX();
     }
 
     private void TriggerSparklesVFX()
