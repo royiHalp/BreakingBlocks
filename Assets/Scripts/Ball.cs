@@ -10,7 +10,7 @@ public class Ball : MonoBehaviour
     [SerializeField] private float randomVelocityFactor = 0.5f;
     // state
     private Vector2 paddleToBallVector;
-    private bool gameStarted = false;
+    public bool gameStarted = false;
     
     // cached component references
     private AudioSource ballAudioSource;
@@ -32,18 +32,19 @@ public class Ball : MonoBehaviour
         LaunchOnMouseClick();
     }
 
-    private void LockBallToPaddle()
+    public void LockBallToPaddle(bool force=false)
     {
-        if (!gameStarted)
+        if (!gameStarted || force)
         {
             Vector2 paddlePosition = new Vector2(paddle1.transform.position.x, paddle1.transform.position.y);
-            transform.position = paddlePosition + paddleToBallVector;       
+            transform.position = paddlePosition + paddleToBallVector;
+            gameStarted = false;
         }
     }
 
     void LaunchOnMouseClick()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !gameStarted)
         {
             
             BallRigidBody.velocity = new Vector2(launchVelocityX, launchVelocityY);

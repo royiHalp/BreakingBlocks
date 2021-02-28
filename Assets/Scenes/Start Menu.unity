@@ -848,7 +848,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2139049867}
         m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
-        m_MethodName: LoadNextScene
+        m_MethodName: DisableAutoPlayAndStart
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

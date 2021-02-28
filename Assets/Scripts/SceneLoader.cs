@@ -18,7 +18,7 @@ public class SceneLoader : MonoBehaviour {
         {
             theGameStatus = GameStatus.gameStatusInstance;
         }
-        if (theGameStatus && theGameStatus.IsAutoPlayEnabled())
+        if (theGameStatus && GameStatus.isAutoPlayEnabled)
         {
             EnableAutoPlayAndStart();
         }
@@ -38,6 +38,19 @@ public class SceneLoader : MonoBehaviour {
         if (theGameStatus)
         {
             theGameStatus.EnableAutoPlay();
+        }
+        LoadNextScene();
+    }   
+    
+    public void DisableAutoPlayAndStart()
+    {
+        if (!theGameStatus)
+        {
+            theGameStatus = GameStatus.gameStatusInstance;
+        }
+        if (theGameStatus)
+        {
+            theGameStatus.DisableAutoPlay();
         }
         LoadNextScene();
     }

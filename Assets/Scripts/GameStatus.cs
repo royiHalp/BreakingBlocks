@@ -6,9 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class GameStatus : MonoBehaviour
 {
-    [Range(0,1f)] static float gameSpeed = 0.7f;
+    private const float normalGameSpeed = 0.5f;
+    [Range(0,1f)] static float gameSpeed = normalGameSpeed;
+    public static int lives = 3;
 
-    private static bool isAutoPlayEnabled;
+    public static bool isAutoPlayEnabled;
 
     public static GameStatus gameStatusInstance;
     // Start is called before the first frame update
@@ -42,15 +44,13 @@ public class GameStatus : MonoBehaviour
 
     public void EnableAutoPlay()
     {
-        GameStatus gs = FindObjectOfType<GameStatus>();
         gameSpeed = 10f;
         isAutoPlayEnabled = true;
-
     }
-
-    public bool IsAutoPlayEnabled()
+    public void DisableAutoPlay()
     {
-        return isAutoPlayEnabled;
+        gameSpeed = normalGameSpeed;
+        isAutoPlayEnabled = false;
     }
 
     public void SetGameSpeed(float speed)

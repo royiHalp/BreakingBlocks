@@ -32,7 +32,7 @@ public class Paddle : MonoBehaviour
 
     private float GetXPos()
     {
-        if (theGameStatus.IsAutoPlayEnabled())
+        if (GameStatus.isAutoPlayEnabled)
         {
             return theBall.transform.position.x;
         }

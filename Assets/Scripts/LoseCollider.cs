@@ -9,7 +9,6 @@ using UnityEngine.UI;
 public class LoseCollider : MonoBehaviour
 {
     private GameStatus theGameStatus;
-    private bool isAutoPlayMode;
     private Ball theBall;
     private const int delayInterval = 2;
     
@@ -24,20 +23,23 @@ public class LoseCollider : MonoBehaviour
         CountDown.enabled = false;
     }
 
-    private void Update()
-    {
-        isAutoPlayMode = theGameStatus.IsAutoPlayEnabled();
-    }
-
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (isAutoPlayMode)
+        if (GameStatus.isAutoPlayEnabled)
         {
             Debug.Log("cant loose");
             theBall.transform.position = new Vector2(2, 2);
+            theBall.gameStarted = true;
             return;
         }
         Debug.Log("Loose!");
+        if (GameStatus.lives >= 0)
+        {
+            GameStatus.lives--;
+            theBall.gameStarted = false;
+            theBall.LockBallToPaddle(true);
+            return;
+        }
         CountDown.enabled = true;
         StartCoroutine(StartTimerForGameOver());
     }
